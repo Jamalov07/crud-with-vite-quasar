@@ -14,7 +14,7 @@ const miniState = ref(true);
     >
       <q-header
         elevated
-        :class="$q.dark.isActive ? 'bg-secondary' : 'bg-black'"
+        :class="$q.dark.isActive ? 'bg-secondary' : 'bg-blue-600'"
       >
         <q-toolbar>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
@@ -35,43 +35,24 @@ const miniState = ref(true);
       >
         <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: '0' }">
           <q-list padding>
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="bi-flower1" />
-              </q-item-section>
+            <router-link to="/products" class="text-black">
+              <q-item clickable v-ripple>
+                <q-item-section avatar>
+                  <q-icon name="bi-flower1" />
+                </q-item-section>
 
-              <q-item-section>
-                <router-link to="/products"> All Products </router-link>
-              </q-item-section>
-            </q-item>
+                <q-item-section> All Products </q-item-section>
+              </q-item>
+            </router-link>
 
-            <q-item active clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="bi-patch-plus" />
-              </q-item-section>
-
-              <q-item-section>
-                <router-link to="/product/add"> Add Product </router-link>
-              </q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="send" />
-              </q-item-section>
-
-              <q-item-section> Send </q-item-section>
-            </q-item>
-
-            <q-separator />
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="drafts" />
-              </q-item-section>
-
-              <q-item-section> Drafts </q-item-section>
-            </q-item>
+            <router-link to="/product/add" class="text-black">
+              <q-item clickable v-ripple>
+                <q-item-section avatar>
+                  <q-icon name="bi-patch-plus" />
+                </q-item-section>
+                <q-item-section> Add Product </q-item-section>
+              </q-item>
+            </router-link>
           </q-list>
         </q-scroll-area>
       </q-drawer>
@@ -90,4 +71,8 @@ const miniState = ref(true);
     </q-layout>
   </div>
 </template>
-<style></style>
+<style scoped>
+.router-link-active {
+  color: blue !important;
+}
+</style>

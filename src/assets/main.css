@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body, #app {
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box;
+body,
+#app {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
 }
 
+.q-layout-padding {
+  padding: 0px !important;
+}

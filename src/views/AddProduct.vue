@@ -12,15 +12,9 @@ const cost = ref(null);
 const address = ref(null);
 const accept = ref(false);
 const typeId = ref(null);
-let options = [
-  { id: 1, name: "Google" },
-  { id: 2, name: "Facebook" },
-  { id: 3, name: "Youtube" },
-  { id: 4, name: "Telegram" },
-];
 
-onMounted(async() => {
-  console.log(await store.dispatch("getProducts"));
+onMounted(async () => {
+  await store.dispatch("getProductTypes");
 });
 
 async function onSubmit() {
@@ -29,23 +23,22 @@ async function onSubmit() {
       color: "red-5",
       textColor: "white",
       icon: "warning",
-      message: "You need to accept the license and terms first",
+      message: "You need to confirm first",
     });
   } else {
     $q.notify({
-      color: "green-4",
+      color: "green-7",
       textColor: "white",
       icon: "cloud_done",
-      message: "Submitted",
+      message: "New product is inserted",
     });
     const options = {
       name_uz: name.value,
       cost: cost.value,
       address: address.value,
-      product_type_id: typeId.value,
+      product_type_id: settypeId(),
       created_date: Date.now(),
     };
-
 
     console.log(options, store);
     store.dispatch("addProduct", options);
@@ -61,18 +54,29 @@ function onReset() {
 }
 function gettypenames() {
   let typenames: any = [];
-
-  options.forEach((op) => {
-    typenames.push(op.name);
-  });
+  if (store.state.producttypes.product_types.value) {
+    store.state.producttypes.product_types.value.forEach((op: any) => {
+      typenames.push(op.name_uz);
+    });
+  }
   return typenames;
 }
 
+function settypeId() {
+  if (store.state.producttypes.product_types.value) {
+    store.state.producttypes.product_types.value.forEach((op: any) => {
+      if (op.name_uz === typeId.value) {
+        typeId.value = op.id;
+      }
+    });
+  }
+  return typeId.value;
+}
 </script>
 <template>
-  <div class="w-screen h-screen flex justify-center items-center bg-green-400">
-    <div class="q-pa-md w-[50%] h-[60%] bg-white rounded-md shadow">
-      <h4 class="text-center p-2 pb-6">Add Product</h4>
+  <div class=" w-screen h-screen flex justify-center items-center">
+    <div class="q-pa-md w-[50%] h-[60%] bg-white rounded-md shadow-lg border border-blue-600">
+      <h4 class="text-center p-2 pb-6 font-bold text-blue-600">Add Product</h4>
 
       <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
         <q-input
@@ -109,12 +113,12 @@ function gettypenames() {
           <q-select
             v-model="typeId"
             :options="gettypenames()"
-            label="Standard"
+            label="Product type"
             :rules="[(val) => val !== null || 'Select type product']"
           />
         </div>
 
-        <q-toggle v-model="accept" label="I accept the license and terms" />
+        <q-toggle v-model="accept" label="I confirm" />
 
         <div>
           <q-btn label="Submit" type="submit" color="primary" />
