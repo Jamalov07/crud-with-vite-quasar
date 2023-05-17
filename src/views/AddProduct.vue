@@ -22,6 +22,7 @@ async function onSubmit() {
     await $q.notify({
       color: "red-5",
       textColor: "white",
+      timeout:1,
       icon: "warning",
       message: "You need to confirm first",
     });
@@ -118,7 +119,7 @@ function settypeId() {
           />
         </div>
 
-        <q-toggle v-model="accept" label="I confirm" />
+        <q-toggle class="w-full" v-model="accept" label="I confirm" />
 
         <div>
           <q-btn label="Submit" type="submit" color="primary" />
