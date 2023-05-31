@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md q-gutter-sm">
-    <q-btn label="Delete" color="red" @click="inception = true" />
+    <q-btn label="Delete" icon="delete" color="red" @click="inception = true" />
 
     <q-dialog v-model="inception">
       <q-card>

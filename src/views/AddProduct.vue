@@ -22,7 +22,7 @@ async function onSubmit() {
     await $q.notify({
       color: "red-5",
       textColor: "white",
-      timeout:1,
+      timeout: 1,
       icon: "warning",
       message: "You need to confirm first",
     });
@@ -75,12 +75,19 @@ function settypeId() {
 }
 </script>
 <template>
-  <div class=" w-screen h-screen flex justify-center items-center">
-    <div class="q-pa-md w-[50%] h-[60%] bg-white rounded-md shadow-lg border border-blue-600">
-      <h4 class="text-center p-2 pb-6 font-bold text-blue-600">Add Product</h4>
+  <div
+    class="w-full h-screen flex justify-center border-2 border-black items-center"
+  >
+    <div
+      class="q-pa-md w-[50%] min-w-[350px] md:h-[60%] bg-white rounded-md shadow-lg border border-blue-600"
+    >
+      <h4 class="text-center p-2 pb-[4%] font-bold text-blue-600">
+        Add Product
+      </h4>
 
       <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
         <q-input
+          class="inputt"
           filled
           v-model="name"
           label="Product name *"
@@ -90,6 +97,7 @@ function settypeId() {
         />
 
         <q-input
+          class="inputt"
           filled
           v-model="address"
           label="Product address *"
@@ -99,6 +107,7 @@ function settypeId() {
         />
 
         <q-input
+          class="inputt"
           filled
           type="number"
           v-model="cost"
@@ -110,8 +119,9 @@ function settypeId() {
           ]"
         />
 
-        <div class="q-gutter-md">
+        <div class="q-gutter-md selectt">
           <q-select
+            class="inputt"
             v-model="typeId"
             :options="gettypenames()"
             label="Product type"
@@ -119,7 +129,7 @@ function settypeId() {
           />
         </div>
 
-        <q-toggle class="w-full" v-model="accept" label="I confirm" />
+        <q-toggle class="w-full selectt" v-model="accept" label="I confirm" />
 
         <div>
           <q-btn label="Submit" type="submit" color="primary" />
@@ -136,4 +146,15 @@ function settypeId() {
   </div>
 </template>
 
-<style></style>
+<style scoped>
+@media only screen and (max-width: 600px) {
+  .inputt {
+    padding: 10px !important;
+    margin: 0px !important;
+  }
+  .selectt {
+    margin: 0px !important;
+    padding: 0px 10px !important;
+  }
+}
+</style>

@@ -1,6 +1,7 @@
 <template>
-  <div class="q-pa-md q-gutter-sm">
-    <q-btn label="Edit" color="primary" @click="fixed = true" />
+  <div class="q-pa-md q-gutter-sm ">
+    
+    <q-btn icon="edit" label="Edit" color="primary" @click="fixed = true" />
 
     <q-dialog v-model="fixed" class="">
       <q-card class="w-[700px]">
